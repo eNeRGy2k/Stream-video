@@ -1,20 +1,3 @@
-"""
-VideoPlayerBot, Telegram Video Chat Bot
-Copyright (c) 2021  Asm Safone <https://github.com/AsmSafone>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>
-"""
 
 import asyncio
 from config import Config
@@ -25,13 +8,13 @@ from pyrogram.errors import MessageNotModified
 
 CHAT_ID = Config.CHAT_ID
 USERNAME = Config.BOT_USERNAME
-HOME_TEXT = "👋🏻 **Hi [{}](tg://user?id={})**, \n\nI'm **Video Player Bot**. \nI Can Stream Lives, Radios, YouTube Videos & Telegram Video Files On Voice Chat Of Telegram Channels & Groups 😉! \n\n**Made With ❤️ By @ImSafone!** 👑"
+HOME_TEXT = "👋🏻 **Hi [{}](tg://user?id={})**, \n\nI'm **Video Streaming bot**. \nI Can Stream Lives, Radios, YouTube Videos & Telegram Video Files On Voice Chat Of Telegram Channels & Groups 😉! \n\n**Made With ❤️ By @monstar_0!** 👑"
 HELP_TEXT = """
 🏷️ --**Setting Up**-- :
 
 \u2022 Start a voice chat in your channel or group.
 \u2022 Add bot and user account in chat with admin rights.
-\u2022 Use /stream [youtube link] or /stream [live stream link] or /stream as a reply to an video file.
+\u2022 Use /stream [youtube link] or /stream [live stream link] or /stream as a reply to a video file.
 
 🏷️ --**Common Commands**-- :
 
@@ -45,7 +28,7 @@ HELP_TEXT = """
 \u2022 `/endstream` - stop streaming the video
 
 © **Powered By** : 
-**@AsmSafone | @SafoTheBot** 👑
+**@StylishUser | @Monstar_0** 👑
 """
 
 
@@ -54,12 +37,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
     if query.data=="help":
         buttons = [
             [
-                InlineKeyboardButton("CHANNEL", url="https://t.me/AsmSafone"),
-                InlineKeyboardButton("SUPPORT", url="https://t.me/SafoTheBot"),
+                InlineKeyboardButton("CHANNEL", url="https://t.me/EnglishChatting_Club"),
+                InlineKeyboardButton("SUPPORT", url="https://t.me/STylishUser"),
             ],
             [
-                InlineKeyboardButton("MORE BOTS", url="https://t.me/AsmSafone/173"),
-                InlineKeyboardButton("SOURCE CODE", url="https://github.com/AsmSafone/VideoPlayerBot"),
+                InlineKeyboardButton("Owner", url="https://t.me/Tithonus"),
+                InlineKeyboardButton("SOURCE CODE", url="https://github.com/MohsinHsn/Stream_video"),
             ],
             [
                 InlineKeyboardButton("BACK HOME", callback_data="home"),
@@ -81,12 +64,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 InlineKeyboardButton("SEARCH INLINE", switch_inline_query_current_chat=""),
             ],
             [
-                InlineKeyboardButton("CHANNEL", url="https://t.me/AsmSafone"),
-                InlineKeyboardButton("SUPPORT", url="https://t.me/SafoTheBot"),
+                InlineKeyboardButton("CHANNEL", url="https://t.me/EnglishChatting_Club"),
+                InlineKeyboardButton("SUPPORT", url="https://t.me/StylishUser"),
             ],
             [
-                InlineKeyboardButton("MORE BOTS", url="https://t.me/AsmSafone/173"),
-                InlineKeyboardButton("SOURCE CODE", url="https://github.com/AsmSafone/VideoPlayerBot"),
+                InlineKeyboardButton("Owner", url="https://t.me/Tithonus"),
+                InlineKeyboardButton("SOURCE CODE", url="https://github.com/mohsinhsn/Stream-video"),
             ],
             [
                 InlineKeyboardButton("❔ HOW TO USE ❔", callback_data="help"),
@@ -116,12 +99,12 @@ async def start(client, message):
                 InlineKeyboardButton("SEARCH INLINE", switch_inline_query_current_chat=""),
             ],
             [
-                InlineKeyboardButton("CHANNEL", url="https://t.me/AsmSafone"),
-                InlineKeyboardButton("SUPPORT", url="https://t.me/SafoTheBot"),
+                InlineKeyboardButton("CHANNEL", url="https://t.me/EnglishChatting_Club"),
+                InlineKeyboardButton("SUPPORT", url="https://t.me/StylishUser"),
             ],
             [
-                InlineKeyboardButton("MORE BOTS", url="https://t.me/AsmSafone/173"),
-                InlineKeyboardButton("SOURCE CODE", url="https://github.com/AsmSafone/VideoPlayerBot"),
+                InlineKeyboardButton("Owner", url="https://t.me/tithonus"),
+                InlineKeyboardButton("SOURCE CODE", url="https://github.com/mohsinhsn/Stream-video"),
             ],
             [
                 InlineKeyboardButton("❔ HOW TO USE ❔", callback_data="help"),
@@ -134,16 +117,15 @@ async def start(client, message):
 async def help(client, message):
     buttons = [
             [
-                InlineKeyboardButton("CHANNEL", url="https://t.me/AsmSafone"),
-                InlineKeyboardButton("SUPPORT", url="https://t.me/SafoTheBot"),
+                InlineKeyboardButton("CHANNEL", url="https://t.me/EnglishChatting_Club"),
+                InlineKeyboardButton("SUPPORT", url="https://t.me/StylishUser"),
             ],
             [
-                InlineKeyboardButton("MORE BOTS", url="https://t.me/AsmSafone/173"),
-                InlineKeyboardButton("SOURCE CODE", url="https://github.com/AsmSafone/VideoPlayerBot"),
+                InlineKeyboardButton("Owner", url="https://t.me/tithonus"),
+                InlineKeyboardButton("SOURCE CODE", url="https://github.com/mohsinhsn/Stream-video"),
             ],
             [
-                InlineKeyboardButton("BACK HOME", callback_data="home"),
-                InlineKeyboardButton("CLOSE MENU", callback_data="close"),
+                InlineKeyboardButton("❔ HOW TO USE ❔", callback_data="help"),
             ]
             ]
     reply_markup = InlineKeyboardMarkup(buttons)
