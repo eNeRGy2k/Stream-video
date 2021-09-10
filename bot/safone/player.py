@@ -84,7 +84,7 @@ async def stream(client, m: Message):
                     await group_call.stop()
                     await sleep(3)
                     await group_call.join(CHAT_ID)
-                    await group_call.start_video(ytstream, with_audio=True, repeat=False)
+                    await group_call.start_video(ytstream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
                     await msg.edit(f"▶Started [YouTube Streaming]({query})!", disable_web_page_preview=True)
                 except Exception as e:
@@ -92,7 +92,7 @@ async def stream(client, m: Message):
             else:
                 try:
                     await group_call.join(CHAT_ID)
-                    await group_call.start_video(ytstream, with_audio=True, repeat=False)
+                    await group_call.start_video(ytstream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
                     await msg.edit(f"▶Started [YouTube Streaming]({query})!", disable_web_page_preview=True)
                 except Exception as e:
@@ -107,7 +107,7 @@ async def stream(client, m: Message):
                     await group_call.stop()
                     await sleep(3)
                     await group_call.join(CHAT_ID)
-                    await group_call.start_video(livestream, with_audio=True, repeat=False)
+                    await group_call.start_video(livestream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
                     await msg.edit(f"▶Started [Live Streaming]({query})!", disable_web_page_preview=True)
                 except Exception as e:
@@ -115,7 +115,7 @@ async def stream(client, m: Message):
             else:
                 try:
                     await group_call.join(CHAT_ID)
-                    await group_call.start_video(livestream, with_audio=True, repeat=False)
+                    await group_call.start_video(livestream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
                     await msg.edit(f"▶Started [Live Streaming]({query})!**", disable_web_page_preview=True)
                 except Exception as e:
