@@ -5,7 +5,6 @@
 A Telegram Bot By [@StylishUser](https://t.me/StylishUser) To Stream Videos in Telegram Voice Chat.
 
 ## Main Features
-
 - Supports Live Streaming
 - Supports YouTube Streaming
 - Supports Live Radio Streaming
@@ -60,11 +59,11 @@ $ python3 -m bot
 
 
 ## License
-```sh
 Streaming bot, Telegram Video Chat Bot
 
 
 ## Credits
+
 - [Monstar](https://github.com/MohsinHsn) for [Editing 😜](https://github.com/MohsinHsn/Stream-video) ☠️
 - [Safone](https://github.com/AsmSafone) for [Noting](https://github.com/AsmSafone/VideoPlayerBot) 😬
 - [Dan](https://github.com/delivrance) for [Pyrogram](https://github.com/pyrogram/pyrogram) ❤️
