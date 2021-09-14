@@ -46,7 +46,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(1)
+                await sleep(3)
             except Exception as e:
                 print(e)
                 pass
@@ -55,13 +55,13 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(1)
+            await sleep(3)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(1)
+            await sleep(3)
 
         regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
         match = re.match(regex,query)
@@ -77,12 +77,12 @@ async def stream(client, m: Message):
                 await msg.edit(f"YouTube Download Error! \n\n`{e}`")
                 print(e)
                 return
-            await sleep(1)
+            await sleep(3)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(1)
+                    await sleep(3)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(ytstream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -100,12 +100,12 @@ async def stream(client, m: Message):
         else:
             await msg.edit("`Starting Live Stream ...`")
             livestream = query
-            await sleep(1)
+            await sleep(3)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(1)
+                    await sleep(3)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(livestream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -128,7 +128,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(1)
+                await sleep(3)
             except Exception as e:
                 print(e)
                 pass
@@ -137,22 +137,22 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(1)
+            await sleep(3)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(1)
+            await sleep(3)
 
         await msg.edit("🔄 `Downloading ...`")
         video = await client.download_media(media)
-        await sleep(1)
+        await sleep(3)
         group_call = group_call_factory.get_group_call()
         if group_call.is_connected:
             try:
                 await group_call.stop()
-                await sleep(1)
+                await sleep(3)
                 await group_call.join(CHAT_ID)
                 await group_call.start_video(video, with_audio=True, repeat=True)
                 VIDEO_CALL[CHAT_ID] = group_call
@@ -181,7 +181,7 @@ async def endstream(client, m: Message):
     if process:
         try:
             process.send_signal(SIGINT)
-            await sleep(1)
+            await sleep(3)
         except Exception as e:
             print(e)
             pass
@@ -225,4 +225,4 @@ async def not_chat(_, m: Message):
                 InlineKeyboardButton("MAKE YOUR OWN BOT", url="https://heroku.com/deploy?template=https://github.com/MohsinHsn/Stream-video"),
             ]
          ]
-    await m.reply_text(text="Sorry, you can't use this bot in your group🤷‍! But you can make your own bot like it from this [Source Code](https://github.com/MohsinHsn/Stream-video) Below 😉!**", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
+    await m.reply_text(text="Sorry, you can't use this bot in your group🤷‍! But you can make your own bot like it from this [Source Code](https://github.com/MohsinHsn/Stream-video) below 😊!**", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
