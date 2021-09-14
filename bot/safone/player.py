@@ -46,7 +46,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(3)
+                await sleep(1)
             except Exception as e:
                 print(e)
                 pass
@@ -55,13 +55,13 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(1)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(1)
 
         regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
         match = re.match(regex,query)
@@ -77,12 +77,12 @@ async def stream(client, m: Message):
                 await msg.edit(f"YouTube Download Error! \n\n`{e}`")
                 print(e)
                 return
-            await sleep(2)
+            await sleep(1)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(3)
+                    await sleep(1)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(ytstream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -100,12 +100,12 @@ async def stream(client, m: Message):
         else:
             await msg.edit("`Starting Live Stream ...`")
             livestream = query
-            await sleep(2)
+            await sleep(1)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(3)
+                    await sleep(1)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(livestream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -128,7 +128,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(3)
+                await sleep(1)
             except Exception as e:
                 print(e)
                 pass
@@ -137,24 +137,24 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(1)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(1)
 
         await msg.edit("🔄 `Downloading ...`")
         video = await client.download_media(media)
-        await sleep(2)
+        await sleep(1)
         group_call = group_call_factory.get_group_call()
         if group_call.is_connected:
             try:
                 await group_call.stop()
-                await sleep(3)
+                await sleep(1)
                 await group_call.join(CHAT_ID)
-                await group_call.start_video(video, with_audio=True, repeat=False)
+                await group_call.start_video(video, with_audio=True, repeat=True)
                 VIDEO_CALL[CHAT_ID] = group_call
                 await msg.edit(f"▶Started [Video Streaming](https://t.me/StylishUser)!", disable_web_page_preview=True)
             except Exception as e:
@@ -162,7 +162,7 @@ async def stream(client, m: Message):
         else:
             try:
                 await group_call.join(CHAT_ID)
-                await group_call.start_video(video, with_audio=True, repeat=False)
+                await group_call.start_video(video, with_audio=True, repeat=True)
                 VIDEO_CALL[CHAT_ID] = group_call
                 await msg.edit(f"▶Started [Video Streaming](https://t.me/StylishUser)!", disable_web_page_preview=True)
             except Exception as e:
@@ -181,7 +181,7 @@ async def endstream(client, m: Message):
     if process:
         try:
             process.send_signal(SIGINT)
-            await sleep(3)
+            await sleep(1)
         except Exception as e:
             print(e)
             pass
@@ -205,7 +205,7 @@ admincmds=["stream", "radio", "endstream", f"stream@{USERNAME}", f"radio@{USERNA
 @Client.on_message(filters.command(admincmds) & ~filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
 async def notforu(_, m: Message):
     k = await m.reply_sticker("CAACAgUAAxkBAAEBpyZhF4R-ZbS5HUrOxI_MSQ10hQt65QACcAMAApOsoVSPUT5eqj5H0h4E")
-    await sleep(5)
+    await sleep(3)
     await k.delete()
     try:
         await m.delete()
@@ -225,4 +225,4 @@ async def not_chat(_, m: Message):
                 InlineKeyboardButton("MAKE YOUR OWN BOT", url="https://heroku.com/deploy?template=https://github.com/MohsinHsn/Stream-video"),
             ]
          ]
-    await m.reply_text(text="**Sorry, You Can't Use This Bot In This Group 🤷‍♂️! But You Can Make Your Own Bot Like This From The [Source Code](https://github.com/MohsinHsn/Stream-video) Below 😉!**", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
+    await m.reply_text(text="Sorry, you can't use this bot in your group🤷‍! But you can make your own bot like it from this [Source Code](https://github.com/MohsinHsn/Stream-video) Below 😉!**", reply_markup=InlineKeyboardMarkup(buttons), disable_web_page_preview=True)
