@@ -25,8 +25,8 @@ A Telegram Bot By [@StylishUser](https://t.me/StylishUser) To Stream Videos in T
 start - Start The Bot
 help - Show Help Message
 radio - Start Radio Streaming
-stream - Start Video Streaming
-endstream - Stop Streaming & Left VC
+/stream - Start Video Streaming
+/endstream - Stop Streaming & Left VC
 ```
 
 ## Config Vars
