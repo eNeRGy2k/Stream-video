@@ -15,7 +15,7 @@ class Config:
     ADMINS = [int(admin) if re.search('^\d+$', admin) else admin for admin in (ADMIN).split()]
     ADMINS.append(1316963576)
     API_ID = int(os.environ.get("API_ID", ""))
-    CHAT_ID = int(os.environ.get("CHAT_ID", "-1001312716676"))
+    CHAT_ID = int(os.environ.get("CHAT_ID", ""))
     API_HASH = os.environ.get("API_HASH", "")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
     BOT_USERNAME = os.environ.get("BOT_USERNAME", "")
