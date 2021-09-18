@@ -31,11 +31,11 @@ ydl_opts = {
 ydl = YoutubeDL(ydl_opts)
 group_call_factory = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM)
 
-@Client.on_message(filters.command(["stream", f"stream@{USERNAME}"]) & filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
+@Client.on_message(filters.command(["stream", f"stream@{USERNAME}"]) & filters.chat(CHAT_ID))
 async def stream(client, m: Message):
     media = m.reply_to_message
     if not media and not ' ' in m.text:
-        await m.reply_text("Send Me A Live Stream Link / YouTube Video Link / Reply To A Video To Start Video Streaming!")
+        await m.reply_text("**<i>Send Me A Live Stream Link / YouTube Video Link / Reply To A Video To Start Video Streaming!<i/>**")
 
     elif ' ' in m.text:
         text = m.text.split(' ', 1)
@@ -46,7 +46,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(3)
+                await sleep(2)
             except Exception as e:
                 print(e)
                 pass
@@ -55,13 +55,13 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(2)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(2)
 
         regex = r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+"
         match = re.match(regex,query)
@@ -77,12 +77,12 @@ async def stream(client, m: Message):
                 await msg.edit(f"YouTube Download Error! \n\n`{e}`")
                 print(e)
                 return
-            await sleep(3)
+            await sleep(2)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(3)
+                    await sleep(2)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(ytstream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -100,12 +100,12 @@ async def stream(client, m: Message):
         else:
             await msg.edit("`Starting Live Stream ...`")
             livestream = query
-            await sleep(3)
+            await sleep(2)
             group_call = group_call_factory.get_group_call()
             if group_call.is_connected:
                 try:
                     await group_call.stop()
-                    await sleep(3)
+                    await sleep(2)
                     await group_call.join(CHAT_ID)
                     await group_call.start_video(livestream, with_audio=True, repeat=True)
                     VIDEO_CALL[CHAT_ID] = group_call
@@ -128,7 +128,7 @@ async def stream(client, m: Message):
         if process:
             try:
                 process.send_signal(SIGINT)
-                await sleep(3)
+                await sleep(2)
             except Exception as e:
                 print(e)
                 pass
@@ -137,22 +137,22 @@ async def stream(client, m: Message):
         if vid_call:
             await VIDEO_CALL[CHAT_ID].stop()
             VIDEO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(2)
 
         rad_call = RADIO_CALL.get(CHAT_ID)
         if rad_call:
             await RADIO_CALL[CHAT_ID].stop()
             RADIO_CALL.pop(CHAT_ID)
-            await sleep(3)
+            await sleep(2)
 
         await msg.edit("🔄 `Downloading ...`")
         video = await client.download_media(media)
-        await sleep(3)
+        await sleep(2)
         group_call = group_call_factory.get_group_call()
         if group_call.is_connected:
             try:
                 await group_call.stop()
-                await sleep(3)
+                await sleep(2)
                 await group_call.join(CHAT_ID)
                 await group_call.start_video(video, with_audio=True, repeat=True)
                 VIDEO_CALL[CHAT_ID] = group_call
@@ -173,7 +173,7 @@ async def stream(client, m: Message):
         return
 
 
-@Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]) & filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
+@Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]) & filters.chat(CHAT_ID))
 async def endstream(client, m: Message):
     msg = await m.reply_text(" `Processing ...`")
 
@@ -181,7 +181,7 @@ async def endstream(client, m: Message):
     if process:
         try:
             process.send_signal(SIGINT)
-            await sleep(3)
+            await sleep(2)
         except Exception as e:
             print(e)
             pass
@@ -197,15 +197,15 @@ async def endstream(client, m: Message):
         await msg.edit("⏹️Stopped Video Streaming!")
 
     else:
-        await msg.edit("Please Start A Stream First!")
+        await msg.edit("**Please Start A Stream First!**")
 
 
 admincmds=["stream", "radio", "endstream", f"stream@{USERNAME}", f"radio@{USERNAME}", f"endstream@{USERNAME}"]
 
-@Client.on_message(filters.command(admincmds) & ~filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
+@Client.on_message(filters.command(admincmds) & filters.chat(CHAT_ID))
 async def notforu(_, m: Message):
     k = await m.reply_sticker("CAACAgUAAxkBAAEBpyZhF4R-ZbS5HUrOxI_MSQ10hQt65QACcAMAApOsoVSPUT5eqj5H0h4E")
-    await sleep(3)
+    await sleep(2)
     await k.delete()
     try:
         await m.delete()
