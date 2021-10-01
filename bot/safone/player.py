@@ -31,7 +31,7 @@ ydl_opts = {
 ydl = YoutubeDL(ydl_opts)
 group_call_factory = GroupCallFactory(User, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM)
 
-@Client.on_message(filters.command(["stream", f"stream@{USERNAME}"]) & filters.chat(CHAT_ID))
+@Client.on_message(filters.command(["stream", f"stream@{USERNAME}"]))
 async def stream(client, m: Message):
     media = m.reply_to_message
     if not media and not ' ' in m.text:
@@ -173,7 +173,7 @@ async def stream(client, m: Message):
         return
 
 
-@Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]) & filters.chat(CHAT_ID))
+@Client.on_message(filters.command(["endstream", f"endstream@{USERNAME}"]))
 async def endstream(client, m: Message):
     msg = await m.reply_text(" `Processing ...`")
 
@@ -202,7 +202,7 @@ async def endstream(client, m: Message):
 
 admincmds=["stream", "radio", "endstream", f"stream@{USERNAME}", f"radio@{USERNAME}", f"endstream@{USERNAME}"]
 
-@Client.on_message(filters.command(admincmds) & filters.chat(CHAT_ID))
+@Client.on_message(filters.command(admincmds))
 async def notforu(_, m: Message):
     k = await m.reply_sticker("CAACAgUAAxkBAAEBpyZhF4R-ZbS5HUrOxI_MSQ10hQt65QACcAMAApOsoVSPUT5eqj5H0h4E")
     await sleep(2)
@@ -214,7 +214,7 @@ async def notforu(_, m: Message):
 
 allcmd = ["start", "help", f"start@{USERNAME}", f"help@{USERNAME}"] + admincmds
 
-@Client.on_message(filters.command(allcmd) & filters.group & ~filters.chat(CHAT_ID))
+@Client.on_message(filters.command(allcmd) & filters.group & ~filters.edited)
 async def not_chat(_, m: Message):
     buttons = [
             [
