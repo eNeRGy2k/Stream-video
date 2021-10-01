@@ -18,7 +18,7 @@ VIDEO_CALL = db.VIDEO_CALL
 RADIO_CALL = db.RADIO_CALL
 FFMPEG_PROCESSES = db.FFMPEG_PROCESSES
 
-@Client.on_message(filters.command(["radio", f"radio@{USERNAME}"]) & filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
+@Client.on_message(filters.command(["radio", f"radio@{USERNAME}"]))
 async def radio(client, m: Message):
     if not ' ' in m.text:
         await m.reply_text("❗ __Send Me An Live Radio Link / YouTube Live Video Link To Start Radio Streaming!__")
